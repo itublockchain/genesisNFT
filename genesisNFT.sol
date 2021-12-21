@@ -11,7 +11,7 @@ contract ITUBlockchainGenesisNFT is ERC1155, Ownable {
     bool public activeMint;
     string private INITIAL_URI = "https://";
     uint private constant GENESIS_ID = 0;
-    mapping (address => bool) private minters;
+    mapping (address => uint) private minters;
 
     constructor() ERC1155(INITIAL_URI) {
         name = "ITU Blockchain Genesis NFT";
@@ -26,17 +26,23 @@ contract ITUBlockchainGenesisNFT is ERC1155, Ownable {
 
     function mintGenesis() public payable {
         require(activeMint, "Mint operations have stopped!");
-        require(msg.value >= .2 ether, "Inappropriate payment!");
-        minters[msg.sender] == true;
+        require(msg.value == .2 ether, "Inappropriate payment!");
+        minters[msg.sender]++;
         supply++;
         _mint(msg.sender, GENESIS_ID, 1, "");
+    }
+
+    function giftGenesis(address _receiver) public onlyOwner {
+        minters[_receiver]++;
+        supply++;
+        _mint(_receiver, GENESIS_ID, 1, "");
     }
 
     function changeMintStatus() public onlyOwner {
         activeMint = !activeMint;
     }
 
-    function isMinter() external view returns (bool) {
-        return minters[msg.sender];
+    function isMinter(address _user) external view returns (uint) {
+        return minters[_user];
     }
 }
