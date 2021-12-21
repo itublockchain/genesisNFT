@@ -45,4 +45,9 @@ contract ITUBlockchainGenesisNFT is ERC1155, Ownable {
     function isMinter(address _user) external view returns (uint) {
         return minters[_user];
     }
+
+    function withdraw() public onlyOwner {
+        require(address(this).balance > 0, "No balance!");
+        payable(owner()).transfer(address(this).balance);
+    }
 }
