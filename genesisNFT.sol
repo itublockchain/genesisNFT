@@ -11,7 +11,7 @@ contract ITUBlockchainGenesisToken is ERC1155, Ownable {
     bool public activeMint;
     string private INITIAL_URI = "ipfs://QmUeJJwXPo1XFvvvFcKjZUY2yCYjuogRH2vg1f1B7kXS7B";
     uint256 private constant GENESIS_ID = 0;
-    uint256 public price = .15 ether;
+    uint256 public price = .1773 ether;
     mapping(address => uint256) private minters;
     event Minted(address _address);
 
