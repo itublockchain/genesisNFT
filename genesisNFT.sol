@@ -13,6 +13,7 @@ contract ITUBlockchainGenesisNFT is ERC1155, Ownable {
     uint256 private constant GENESIS_ID = 0;
     uint256 public price = .2 ether;
     mapping(address => uint256) private minters;
+    event Minted(address _address);
 
     constructor() ERC1155(INITIAL_URI) {
         name = "ITU Blockchain Genesis NFT";
@@ -30,12 +31,14 @@ contract ITUBlockchainGenesisNFT is ERC1155, Ownable {
         minters[msg.sender]++;
         supply++;
         _mint(msg.sender, GENESIS_ID, 1, "");
+        emit Minted(msg.sender);
     }
 
     function giftGenesis(address _receiver) public onlyOwner {
         minters[_receiver]++;
         supply++;
         _mint(_receiver, GENESIS_ID, 1, "");
+        emit Minted(_receiver);
     }
 
     function changeMintStatus() public onlyOwner {
