@@ -42,7 +42,7 @@ contract ITUBlockchainGenesisNFT is ERC1155, Ownable {
         activeMint = !activeMint;
     }
 
-    function isMinter(address _user) external view returns (uint) {
+    function getMintCounts(address _user) external view returns (uint) {
         return minters[_user];
     }
 
