@@ -4,20 +4,20 @@ pragma solidity ^0.8.2;
 import "@openzeppelin/contracts@4.4.0/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts@4.4.0/access/Ownable.sol";
 
-contract ITUBlockchainGenesisNFT is ERC1155, Ownable {
+contract ITUBlockchainGenesisToken is ERC1155, Ownable {
     string public name;
     string public symbol;
     uint256 public supply;
     bool public activeMint;
-    string private INITIAL_URI = "https://";
+    string private INITIAL_URI = "ipfs://QmUeJJwXPo1XFvvvFcKjZUY2yCYjuogRH2vg1f1B7kXS7B";
     uint256 private constant GENESIS_ID = 0;
     uint256 public price = .2 ether;
     mapping(address => uint256) private minters;
     event Minted(address _address);
 
     constructor() ERC1155(INITIAL_URI) {
-        name = "ITU Blockchain Genesis NFT";
-        symbol = "ITUBC";
+        name = "ITU Blockchain Genesis Token";
+        symbol = "ITUGT";
         activeMint = true;
     }
 
