@@ -26,7 +26,7 @@ contract ITUBlockchainGenesisNFT is ERC1155, Ownable {
 
     function mintGenesis() public payable {
         require(activeMint, "Mint operations have stopped!");
-        require(msg.value == .2 ether, "Inappropriate payment!");
+        require(msg.value >= .2 ether, "Inappropriate payment!");
         minters[msg.sender]++;
         supply++;
         _mint(msg.sender, GENESIS_ID, 1, "");
